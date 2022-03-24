@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(genres, plays) {
+        let answer = [];
+
+        let map = new Map();
+
+        for (let i = 0; i < genres.length; i++) {
+          if (map.has(genres[i])) {
+            map.set(
+              genres[i],
+              [...map.get(genres[i]), [plays[i], i]].sort((a, b) => b[0] - a[0])
+            );
+          } else {
+            map.set(genres[i], [[plays[i], i]]);
+          }
+        }
+
+        let sortMapArr = [...map].sort((a, b) => {
+          const sumB = b[1].reduce((acc, cur) => {
+            return acc + cur[0];
+          }, 0);
+
+          const sumA = a[1].reduce((acc, cur) => {
+            return acc + cur[0];
+          }, 0);
+
+          return sumB - sumA;
+        });
+
+        sortMapArr.forEach((item) => {
+          if (item[1].length >= 2) {
+            answer.push(item[1][0][1]);
+            answer.push(item[1][1][1]);
+          } else {
+            answer.push(item[1][0][1]);
+          }
+        });
+
+        return answer;
+      }
+      console.log(
+        solution(
+          ["classic", "pop", "classic", "classic", "pop"],
+          [500, 600, 150, 800, 2500]
+        )
+      );
+    </script>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 같은 장르끼리 묶어야해요.
+      // 2. 묶인 노래들을 재생 순으로 정렬을 해야해요.
+      // 3. 노래를 2개까지 자르는 자업을 해야해요.
+
+      function solution(genres, plays) {
+        const genreMap = new Map();
+
+        genres
+          .map((genre, index) => [genre, play[index]])
+          .forEach(([genre, play], index) => {
+            const data = genreMap.get(genre);
+            genreMap.set(genre, {
+              total: data.total + play,
+              song: [...data.songs, { play, index }]
+                .sort((a, b) => b.play - a.play)
+                .slice(0, 2),
+            });
+          });
+
+        return [...genreMap.entries()]
+          .sort((a, b) => (b[1].total = a[1].total))
+          .flatMap((item) => item[1].songs)
+          .map((song) => song.index);
+      }
+    </script>
+  </body>
+</html>

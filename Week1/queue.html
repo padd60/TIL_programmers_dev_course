@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(priorities, location) {
+        let answer = 0;
+
+        const myPrint = [location, priorities[location]];
+
+        const newPrintWait = [];
+
+        for (let i = 0; i < priorities.length; i++) {
+          newPrintWait.push([i, priorities[i]]);
+        }
+
+        while (newPrintWait.length > 0) {
+          let dequeue = newPrintWait.shift();
+
+          let max = newPrintWait.filter((item) => item[1] > dequeue[1]);
+
+          if (max.length > 0) {
+            newPrintWait.push(dequeue);
+          } else {
+            answer++;
+
+            if (dequeue[1] === myPrint[1] && dequeue[0] === myPrint[0]) {
+              return answer;
+            }
+          }
+        }
+      }
+      console.log(solution([2, 1, 3, 2], 2));
+      console.log(solution([1, 1, 9, 1, 1, 1], 0));
+    </script>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Node {
+        constructor(value) {
+          this.value = value;
+          this.next = null;
+        }
+      }
+
+      class Queue {
+        constructor() {
+          this.head = null;
+          this.tail = null;
+        }
+
+        enqueue(newValue) {
+          const newNode = new Node(newValue);
+          if (this.head === null) {
+            this.head = this.tail = newNode;
+          } else {
+            this.tail.next = newNode;
+            this.tail = newNode;
+          }
+        }
+
+        dequeue() {
+          const value = this.head.value;
+          this.head = this.head.next;
+          return value;
+        }
+
+        peek() {
+          return this.head.value;
+        }
+      }
+
+      function solution(priorities, location) {
+        const queue = new Queue();
+        for (let i = 0; i < priorities.length; i += 1) {
+          queue.enqueue([priorities[i], i]);
+        }
+
+        priorities.sort((a, b) => b - a);
+
+        let count = 0;
+        while (true) {
+          const currentValue = queue.peek();
+          if (currentValue[0] < priorities[count]) {
+            queue.enqueue(queue.dequeue());
+          } else {
+            const value = queue.dequeue();
+            count += 1;
+            if (location === value[1]) {
+              return count;
+            }
+          }
+        }
+
+        return count;
+      }
+    </script>
+  </body>
+</html>
