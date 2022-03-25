@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, times) {
+        let answer = 0;
+
+        let left = 1;
+        let right = n * Math.max(...times);
+
+        while (left <= right) {
+          let mid = Math.floor((left + right) / 2);
+
+          let people = 0;
+
+          times.forEach((item) => {
+            people += Math.floor(mid / item);
+          });
+
+          if (people < n) {
+            left = mid + 1;
+          } else {
+            right = mid - 1;
+          }
+
+          if (people >= n) answer = mid;
+        }
+
+        return answer;
+      }
+      console.log(solution(6, [7, 10]));
+    </script>
+  </body>
+</html>
