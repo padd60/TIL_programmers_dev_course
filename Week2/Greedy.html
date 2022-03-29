@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(number, k) {
+        let answer = "";
+
+        let numbers = [...number];
+
+        let pick = number.length - k;
+
+        while (pick > 0) {
+          let max = Number.MIN_SAFE_INTEGER;
+          let maxIdx = 0;
+
+          for (let i = 0; i < numbers.length; i++) {
+            if (
+              max < numbers[i] &&
+              numbers.slice(i, numbers.length).length >= pick
+            ) {
+              max = numbers[i];
+              maxIdx = i;
+            }
+          }
+
+          numbers.splice(0, maxIdx + 1);
+
+          answer += max;
+
+          pick--;
+        }
+
+        return answer;
+      }
+      console.log(solution("1924", 2));
+      console.log(solution("4177252841", 4));
+    </script>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(number, k) {
+        let answer = "";
+
+        let cnt = 0;
+
+        const stack = [];
+
+        for (const item of number) {
+          while (cnt < k && stack[stack.length - 1] < item) {
+            stack.pop();
+            cnt += 1;
+          }
+
+          stack.push(item);
+        }
+
+        while (cnt < k) {
+          stack.pop();
+          cnt += 1;
+        }
+
+        answer = stack.join("");
+
+        return answer;
+      }
+      console.log(solution("1924", 2));
+      console.log(solution("4177252841", 4));
+    </script>
+  </body>
+</html>

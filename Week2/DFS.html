@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(tickets) {
+        let answer = [];
+
+        tickets.sort();
+
+        let visited = Array(tickets.length).fill(false);
+
+        const DFS = (cur, path) => {
+          if (path.length === tickets.length + 1 && answer.length === 0) {
+            answer = path;
+            return;
+          }
+
+          for (let i = 0; i < tickets.length; i++) {
+            if (visited[i] === true) continue;
+
+            if (cur === tickets[i][0]) {
+              visited[i] = true;
+              DFS(tickets[i][1], [...path, tickets[i][1]]);
+              visited[i] = false;
+            }
+          }
+        };
+
+        DFS("ICN", ["ICN"]);
+
+        return answer;
+      }
+      console.log(
+        solution([
+          ["ICN", "JFK"],
+          ["HND", "IAD"],
+          ["JFK", "HND"],
+        ])
+      );
+      console.log(
+        solution([
+          ["ICN", "SFO"],
+          ["ICN", "ATL"],
+          ["SFO", "ATL"],
+          ["ATL", "ICN"],
+          ["ATL", "SFO"],
+        ])
+      );
+      console.log(
+        solution([
+          ["ICN", "BBB"],
+          ["ICN", "CCC"],
+          ["BBB", "CCC"],
+          ["CCC", "BBB"],
+          ["CCC", "ICN"],
+        ])
+      );
+      console.log(
+        solution([
+          ["ICN", "BOO"],
+          ["ICN", "COO"],
+          ["COO", "DOO"],
+          ["DOO", "COO"],
+          ["BOO", "DOO"],
+          ["DOO", "BOO"],
+          ["BOO", "ICN"],
+          ["COO", "BOO"],
+        ])
+      );
+    </script>
+  </body>
+</html>
