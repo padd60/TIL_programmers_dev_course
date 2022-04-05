@@ -1,4 +1,10 @@
 function TodoForm({ $target, onSubmit }) {
+  // new 생성자 방어코드
+  if (!!!new.target) {
+    alert("new 생성자를 사용해 컴포넌트를 불러오세요.");
+    return;
+  }
+
   const $form = document.createElement("form");
 
   $target.appendChild($form);
@@ -31,3 +37,5 @@ function TodoForm({ $target, onSubmit }) {
 
   this.render();
 }
+
+export default TodoForm;
