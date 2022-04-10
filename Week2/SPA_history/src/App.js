@@ -1,5 +1,5 @@
-import HomePage from "./pages/Homepage.js";
-import ProductPage from "./pages/ProductPage.js";
+import HomePage from "./src/pages/Homepage.js.js";
+import ProductPage from "./src/pages/ProductPage.js";
 
 export default function App({ $target }) {
   const homePage = new HomePage({ $target });

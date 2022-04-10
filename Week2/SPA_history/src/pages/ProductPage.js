@@ -1,5 +1,5 @@
-import ProductOptions from "../ProductOptions.js";
-import Cart from "../Cart.js";
+import ProductOptions from "../../ProductOptions.js";
+import Cart from "../../Cart.js";
 import { request } from "../api.js";
 
 export default function ProductPage({ $target, initialState }) {
