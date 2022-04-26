@@ -1,0 +1,8 @@
+.photo {
+  list-style: none;
+  min-height: 200px;
+}
+
+.photo img {
+  width: 100%;
+}
