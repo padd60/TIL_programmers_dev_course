@@ -1,0 +1,7 @@
+@use "../your-style/main";
+
+.my-style {
+  position: relative;
+  border: 4px solid main.$var-error;
+  @include main.mix-square(700px);
+}

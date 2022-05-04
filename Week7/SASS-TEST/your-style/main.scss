@@ -1,0 +1,11 @@
+@use "./variables" as var;
+@use "./mixins" as mix;
+@forward "./variables" as var-*;
+@forward "./mixins" as mix-*;
+
+.your-style {
+  background-color: var.$primary;
+  border: 4px solid var.$success;
+
+  @include mix.square;
+}

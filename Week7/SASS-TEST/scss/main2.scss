@@ -1,0 +1,6 @@
+@use "./variables" as var;
+
+.main {
+  background-color: var.$primary;
+  border: 4px solid var.$success;
+}

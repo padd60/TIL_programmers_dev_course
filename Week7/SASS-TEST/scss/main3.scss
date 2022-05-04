@@ -1,0 +1,9 @@
+@use "./variables" as var;
+@import "./mixins";
+
+.main {
+  background-color: var.$primary;
+  border: 4px solid var.$success;
+
+  @include square;
+}
