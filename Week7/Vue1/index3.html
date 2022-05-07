@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <fruit-item v-for="name in fruits" v-bind:fruit-name="name" />
+      </ul>
+    </div>
+  </body>
+  <script>
+    const FruitItem = {
+      template: "<li>{{fruitName}}</li>",
+      props: ["fruitName"],
+    };
+
+    const App = {
+      components: {
+        FruitItem,
+      },
+      data() {
+        return {
+          fruits: ["Apple", "Banana", "Cherry"],
+        };
+      },
+    };
+
+    const app = Vue.createApp(App).mount("#app");
+  </script>
+</html>

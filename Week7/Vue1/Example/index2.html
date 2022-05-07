@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 v-bind:[attr]="'active'">{{msg}}</h1>
+      <h2 v-once>{{msg}}</h2>
+      <h3 v-html="rawHTML"></h3>
+    </div>
+  </body>
+  <script>
+    // v-bind: => :
+    // v-on: => @
+    const App = {
+      data() {
+        return {
+          msg: "Hey Vue!!",
+          rawHTML: '<h3 style="color: red;">Raw HTML!</h3>',
+          attr: "class",
+        };
+      },
+    };
+
+    const vm = Vue.createApp(App).mount("#app");
+  </script>
+</html>
