@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://unpkg.com/vue@next"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- lazy는 change 이벤트를 걸어준거처럼 동작하게함 -->
+			<!-- number는 숫자로 변환할 수 있으면 변환해서 넘겨줌 -->
+			<!-- trim은 문자 앞뒤 공백을 제거함 -->
+			<input v-model.lazy.number.trim="msg" type="text" :value="msg" />
+			<h1>{{msg}}</h1>
+		</div>
+		<script>
+			const App = {
+				data() {
+					return {
+						msg: 'Vue!!',
+					};
+				},
+				methods: {
+					log() {
+						console.log(this.msg);
+					},
+				},
+				watch: {
+					msg(newValue) {
+						console.log(typeof newValue);
+						console.log(newValue);
+					},
+				},
+			};
+			const vm = Vue.createApp(App).mount('#app');
+		</script>
+	</body>
+</html>

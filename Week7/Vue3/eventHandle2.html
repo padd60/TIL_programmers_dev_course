@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://unpkg.com/vue@next"></script>
+	</head>
+	<body>
+		<style>
+			.parent {
+				width: 200px;
+				height: 100px;
+				background-color: royalblue;
+				padding: 20px;
+			}
+			.child {
+				width: 100px;
+				height: 80px;
+				background-color: orange;
+			}
+		</style>
+		<div id="app">
+			<!-- prevent 기본 동작 방지, once는 한번만 동작하도록 -->
+			<a href="https://google.com" target="_blank" @click.prevent.once="log"
+				>Google</a
+			>
+			<!-- capture 이벤트 캡쳐링 구현 -->
+			<div class="parent" @click.capture="log2">
+				<!-- stop 이벤트 전파(버블링) 방지 -->
+				<div class="child" @click.stop="log2"></div>
+			</div>
+		</div>
+		<script>
+			window.addEventListener(
+				'click',
+				() => {
+					console.log('window');
+				},
+				{ capture: true }
+			);
+			const App = {
+				data() {
+					return {};
+				},
+				methods: {
+					log(e) {
+						console.log(e.target);
+					},
+					log2(e) {
+						console.log(e.currentTarget, e.target);
+					},
+				},
+			};
+			const vm = Vue.createApp(App).mount('#app');
+		</script>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{user.age}}</h1>
+      <button @click="capitalize">Capitalize</button>
+      <ul>
+        <li v-for="fruit in fruits">{{fruit.name}}</li>
+      </ul>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            user: {
+              name: "Leon",
+              age: 22,
+            },
+            fruits: [
+              { id: 1, name: "Apple" },
+              { id: 2, name: "Banana" },
+              { id: 3, name: "Cherry" },
+            ],
+          };
+        },
+        watch: {
+          user: {
+            handler(newValue, oldValue) {
+              console.log(newValue, oldValue);
+            },
+            deep: true,
+          },
+          fruits: {
+            handler() {
+              console.log(this.fruits);
+            },
+            // 참조타입을 감시할때 필요한 속성
+            deep: true,
+            // 감사하는 데이터가 초기화 될때 바로 실행하는 옵션
+            immediate: true,
+          },
+        },
+        methods: {
+          capitalize() {
+            this.fruits.forEach((fruit) => {
+              fruit.name = fruit.name.toUpperCase();
+            });
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

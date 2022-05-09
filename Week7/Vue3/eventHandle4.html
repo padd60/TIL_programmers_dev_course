@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://unpkg.com/vue@next"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- keyup 뒤에 체이닝으로 키요소를 조합해서 해당 부분만 이벤트 발생 가능 -->
+			<input
+				type="text"
+				@keyup.alt.arrow-down="log"
+				placeholder="alt+ 아래버튼"
+			/>
+			<!-- meta키는 keydown에서만 반응 -->
+			<input
+				type="text"
+				@keydown.meta.arrow-down="log"
+				placeholder="command+ 아래버튼"
+			/>
+			<!-- exact는 해당 키만 입력했을때만 반응 -->
+			<input
+				type="text"
+				@keydown.arrow-down.exact="log"
+				placeholder="아래버튼만"
+			/>
+			<!-- click 뒤에 left, right, middle과 같이 체이닝을 통해 이벤트 발생 영역 지정 가능 -->
+			<button @click.right="log">click</button>
+		</div>
+		<script>
+			const App = {
+				data() {
+					return {};
+				},
+				methods: {
+					log(e) {
+						console.log(e.key || e);
+					},
+				},
+			};
+			const vm = Vue.createApp(App).mount('#app');
+		</script>
+	</body>
+</html>
