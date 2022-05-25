@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Board from "./components/Board";
+import Pagination from "./components/Pagination";
 
 function App() {
+  const [page, setPage] = useState(0);
+  const limit = 10;
+  const offset = page * limit;
+
+  const articles = new Array(100).fill(0).map((_, i) => ({
+    id: i,
+    title: `${i}번 게시물`,
+  }));
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Pagination
+        defaultPage={0}
+        limit={limit}
+        total={articles.length}
+        onChange={setPage}
+      />
+      <Board articles={articles.slice(offset, offset + limit)} />
     </div>
   );
 }
