@@ -21,7 +21,7 @@ module.exports = {
 		ecmaVersion: 2018,
 		sourceType: 'module',
 	},
-	plugins: ['react', '@typescript-eslint'],
+	plugins: ['react', '@typescript-eslint', '@emotion/eslint-plugin'],
 	rules: {
 		/** 함수의 명시적 타입 리턴을 명시적으로 써주지 않아도 되도록 하는 옵션. 이건 off 하는게 맞을까? */
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
