@@ -3,7 +3,7 @@ import Text from '../components/Text';
 export default {
   title: 'Component/Text',
   component: Text,
-  argsTypes: {
+  argTypes: {
     size: { control: 'number' },
     strong: { control: 'boolean' },
     underline: { control: 'boolean' },

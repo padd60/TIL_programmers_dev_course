@@ -3,7 +3,7 @@ import Header from '../components/Header';
 export default {
   title: 'Component/Header',
   component: Header,
-  argsTypes: {
+  argTypes: {
     level: {
       control: {
         type: 'range',
@@ -12,6 +12,8 @@ export default {
         step: 1,
       },
     },
+    strong: { control: { type: 'boolean' } },
+    underline: { control: { type: 'boolean' } },
   },
 };
 
