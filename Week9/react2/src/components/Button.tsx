@@ -21,7 +21,7 @@ const Button = styled.button`
     background-color: #222;
   }
 
-  &:disabled{
+  &:disabled {
     background-color: #888;
   }
 `;
